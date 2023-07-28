@@ -2,6 +2,8 @@ import sys
 
 import pygame
 
+from Step2 import The_Ship
+
 class TheAlienInvasion:
     def __init__(self):
         pygame.init()
@@ -10,6 +12,7 @@ class TheAlienInvasion:
         self.Thescreen = pygame.display.set_mode((1200, 800))
         pygame.display.set_caption("The Alien Invasion")
 
+        self.ship = The_Ship(self)
         self.the_color = (77, 26, 127)
     
     def run_the_game(self):
@@ -19,6 +22,7 @@ class TheAlienInvasion:
                     sys.exit()
 
             self.Thescreen.fill(self.the_color)
+            self.ship.blitme()
             
             pygame.display.flip()
             self.clock.tick(60)
