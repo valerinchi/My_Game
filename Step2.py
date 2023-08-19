@@ -9,7 +9,11 @@ class The_Ship:
         self.rect = self.image.get_rect()
 
         self.rect.center = self.Thescreen_rect.center
-
+        self.moving_right = False
+    def updating_position(self):
+        if self.moving_right:
+            self.rect.x += 1
+            
     def blitme(self):
         self.Thescreen.blit(self.image, self.rect)
 
