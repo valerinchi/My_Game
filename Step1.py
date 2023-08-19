@@ -20,6 +20,9 @@ class TheAlienInvasion:
             for the_event in pygame.event.get():
                 if the_event.type == pygame.QUIT:
                     sys.exit()
+                elif the_event.type == pygame.KEYDOWN:
+                    if the_event.key == pygame.K_RIGHT:
+                        self.ship.rect.x += 1 
 
             self.Thescreen.fill(self.the_color)
             self.ship.blitme()
