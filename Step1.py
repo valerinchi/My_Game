@@ -22,11 +22,14 @@ class TheAlienInvasion:
                     sys.exit()
                 elif the_event.type == pygame.KEYDOWN:
                     if the_event.key == pygame.K_RIGHT:
-                        self.ship.rect.x += 1 
+                        self.ship.moving_right = True
+                elif the_event.type == pygame.KEYUP:
+                    if the_event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False
 
             self.Thescreen.fill(self.the_color)
             self.ship.blitme()
-            
+            self.ship.updating_position()
             pygame.display.flip()
             self.clock.tick(60)
 
