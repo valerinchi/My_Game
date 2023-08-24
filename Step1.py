@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from Step2 import The_Ship
+from bullet import Bullet
 
 class TheAlienInvasion:
     def __init__(self):
@@ -16,11 +17,13 @@ class TheAlienInvasion:
         pygame.display.set_caption("The Alien Invasion")
 
         self.ship = The_Ship(self)
+        self.bullets = pygame.sprite.Group()
     
     def run_the_game(self):
         while True:
             self._check_TheEvents()
             self.ship.The_Update()
+            self._update_bullets()
             self._update_TheScreen()
             self.clock.tick(60)
     
@@ -44,7 +47,9 @@ class TheAlienInvasion:
             self.ship.moving_down = True
         elif event.key == pygame.K_q:
              sys.exit()
-    
+        elif event.key == pygame.K_SPACE:
+             self._fire_bullet()
+     
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False  
@@ -54,16 +59,30 @@ class TheAlienInvasion:
             self.ship.moving_up = False
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = False
+    
+    def _fire_bullet(self):
+        if len(self.bullets) < self.settings.bullet_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+    
+    def _update_bullets(self):
+        self.bullets.update()
+
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <=0:
+                self.bullets.remove(bullet)
                 
     def _update_TheScreen(self):
-            self.Thescreen.fill(self.settings.The_color)
-            self.ship.blitme()
+        self.Thescreen.fill(self.settings.The_color)
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
+        self.ship.blitme()
 
-            pygame.display.flip()
+        pygame.display.flip()
           
-
 if __name__ == '__main__':
     ai = TheAlienInvasion()
     ai.run_the_game()
-                
-        
+  
+                 
+             

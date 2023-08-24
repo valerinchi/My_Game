@@ -9,7 +9,7 @@ class The_Ship:
         self.image = pygame.image.load('image/Ship.bmp')
         self.rect = self.image.get_rect()
 
-        self.rect.center = self.Thescreen_rect.center
+        self.rect.midleft = self.Thescreen_rect.midleft
         
 
         self.x = float(self.rect.x)
