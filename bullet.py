@@ -10,7 +10,8 @@ class Bullet(Sprite):
 
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width, 
             self.settings.bullet_height)
-        self.rect.topleft = ai_game.ship.rect.topleft
+        self.rect.centerx = ai_game.ship.rect.centerx # Centered on the ship´s x-coordinate
+        self.rect.top = ai_game.ship.rect.top  # Align with the top of the ship
 
         self.y = float(self.rect.y)
     
